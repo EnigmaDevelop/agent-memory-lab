@@ -1,7 +1,7 @@
 [project]
 name = "agent-memory-lab"
 version = "0.1.0"
-description = "Does agent memory help or hurt? Four memory strategies measured across 30 sequential sessions with dependent, independent, and trap tasks."
+description = "Does agent memory help or hurt? Three memory strategies vs. a no-memory control, measured across 30 sequential sessions with dependent, independent, and trap tasks."
 requires-python = ">=3.11"
 license = { text = "MIT" }
 dependencies = [

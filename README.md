@@ -63,7 +63,7 @@ environment/     deterministic fictional B2B SaaS company (SQLite + docs), seed-
 tasks/           30-task sequence generator — independent / dependent / trap task types
 src/
   agent.py       the tool-use loop (sql_query / read_doc / answer)
-  memory/        four memory strategies behind one shared protocol
+  memory/        three memory strategies + a no-memory control behind one shared protocol
   judge.py       deterministic scoring + citation-trace interference classification
   llm.py         Ollama + Anthropic clients (prompt caching, determinism pins)
   stats.py       bootstrap CI + permutation testing

@@ -1,4 +1,6 @@
-"""Shared protocol for the four memory strategies (none/full/summary/rag).
+"""Shared protocol for the three memory strategies (full/summary/rag) and
+the no-memory control (none) — all four run through the same interface so
+the harness never has to special-case the control.
 
 A strategy only ever does two things:
 
