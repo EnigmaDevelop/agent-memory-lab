@@ -1,0 +1,53 @@
+==============================================================================
+agent-memory-lab — 3-seed frontier-arm analysis (claude-sonnet-5)
+==============================================================================
+
+Note: pooling 3 order-seeds of the same 30 task-content items is 3
+reshuffled looks at one task set, not 90 independent samples — CIs
+below are informative, not a substitute for a larger/varied task set.
+
+------------------------------------------------------------------------------
+1. Overall accuracy per strategy (pooled, 90 rows = 30 tasks x 3 seeds)
+------------------------------------------------------------------------------
+  none     n=90  accuracy=0.322 95% CI [0.222, 0.411]
+  full     n=90  accuracy=1.000 95% CI [1.000, 1.000]
+  summary  n=90  accuracy=0.956 95% CI [0.911, 0.989]
+  rag      n=90  accuracy=0.978 95% CI [0.944, 1.000]
+
+------------------------------------------------------------------------------
+2. Accuracy by task type (independent / dependent / trap)
+------------------------------------------------------------------------------
+  none:
+    independent  n=30  accuracy=0.933 95% CI [0.833, 1.000]
+    dependent    n=36  accuracy=0.028 95% CI [0.000, 0.083]
+    trap         n=24  accuracy=0.000 95% CI [0.000, 0.000]
+  full:
+    independent  n=30  accuracy=1.000 95% CI [1.000, 1.000]
+    dependent    n=36  accuracy=1.000 95% CI [1.000, 1.000]
+    trap         n=24  accuracy=1.000 95% CI [1.000, 1.000]
+  summary:
+    independent  n=30  accuracy=0.933 95% CI [0.833, 1.000]
+    dependent    n=36  accuracy=1.000 95% CI [1.000, 1.000]
+    trap         n=24  accuracy=0.917 95% CI [0.792, 1.000]
+  rag:
+    independent  n=30  accuracy=0.967 95% CI [0.900, 1.000]
+    dependent    n=36  accuracy=1.000 95% CI [1.000, 1.000]
+    trap         n=24  accuracy=0.958 95% CI [0.875, 1.000]
+
+------------------------------------------------------------------------------
+3. Permutation tests (does the gap beat label-shuffling by chance?)
+------------------------------------------------------------------------------
+  none     vs full     gap=-0.678  p=0.0000  ***
+  none     vs summary  gap=-0.633  p=0.0000  ***
+  none     vs rag      gap=-0.656  p=0.0000  ***
+  full     vs rag      gap=+0.022  p=0.5020  n.s.
+  summary  vs rag      gap=-0.022  p=0.6865  n.s.
+  full     vs summary  gap=+0.044  p=0.1040  n.s.
+
+------------------------------------------------------------------------------
+4. False-memory rate (confirmed interference, trap tasks only)
+------------------------------------------------------------------------------
+  none     trap_n=24  confirmed=0  suspected=0  false_memory_rate=0.000
+  full     trap_n=24  confirmed=0  suspected=0  false_memory_rate=0.000
+  summary  trap_n=24  confirmed=0  suspected=0  false_memory_rate=0.000
+  rag      trap_n=24  confirmed=1  suspected=0  false_memory_rate=0.042

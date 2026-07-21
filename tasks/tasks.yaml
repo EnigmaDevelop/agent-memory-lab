@@ -1,0 +1,326 @@
+seed: 0
+n_sessions: 30
+tasks:
+- session: 1
+  task_id: ew_establish
+  task_type: independent
+  role: establish
+  fact_id: engaged_window
+  prompt: For the customer retention project, the team decided (this is a one-off
+    project convention, separate from the official Active Customer policy) that an
+    'engaged' customer is one with a qualifying usage event in the trailing 45 days.
+    Using this definition, how many engaged customers are there right now?
+  answer: 70
+  answer_type: int
+  decision_planted: engaged_window
+- session: 2
+  task_id: pt_establish
+  task_type: independent
+  role: establish
+  fact_id: priority_ticket_categories
+  prompt: 'The support team decided that ''at-risk'' tickets — the ones that get escalated
+    to the account owner — are categories: billing, bug_report. Using this rule, how
+    many at-risk tickets have been opened in total?'
+  answer: 39
+  answer_type: int
+  decision_planted: priority_ticket_categories
+- session: 3
+  task_id: noise_1
+  task_type: independent
+  role: noise
+  fact_id: null
+  prompt: How many support tickets currently have priority 'urgent'?
+  answer: 7
+  answer_type: int
+- session: 4
+  task_id: hv_establish
+  task_type: independent
+  role: establish
+  fact_id: high_value_mrr
+  prompt: 'In today''s revenue-ops sync, the team decided: for the new loyalty program,
+    a customer counts as ''high-value'' if their status is active and their active
+    subscription MRR exceeds $2000. Using this new definition, how many high-value
+    customers are there in the Media industry?'
+  answer: 6
+  answer_type: int
+  decision_planted: high_value_mrr
+- session: 5
+  task_id: cs_establish
+  task_type: independent
+  role: establish
+  fact_id: campaign_success_mrr
+  prompt: Marketing decided a campaign counts as 'successful' if the combined active-subscription
+    MRR of customers attributed to it exceeds $5000. Using this rule, is the 'Ascend
+    Launch' campaign successful? Answer 'yes' or 'no'.
+  answer: 'yes'
+  answer_type: string
+  decision_planted: campaign_success_mrr
+- session: 6
+  task_id: ew_revise
+  task_type: independent
+  role: revise
+  fact_id: engaged_window
+  prompt: The retention project team re-reviewed the numbers and decided the engaged-customer
+    lookback window was too loose — they're changing it from 45 days to 30 days effective
+    immediately. Using this updated window, how many engaged customers are there right
+    now?
+  answer: 58
+  answer_type: int
+  decision_planted: engaged_window
+- session: 7
+  task_id: cs_consume_3
+  task_type: dependent
+  role: consume
+  fact_id: campaign_success_mrr
+  prompt: Using marketing's 'successful campaign' MRR rule decided earlier (the MRR
+    threshold that defines success), what is the combined attributed active-subscription
+    MRR for the 'Horizon Summit' campaign, in dollars?
+  answer: 5062
+  answer_type: int
+  expected_source_session: 5
+- session: 8
+  task_id: cs_consume_2
+  task_type: dependent
+  role: consume
+  fact_id: campaign_success_mrr
+  prompt: Using marketing's 'successful campaign' MRR rule decided earlier, is the
+    'Compass Sprint' campaign successful? Answer 'yes' or 'no'.
+  answer: 'yes'
+  answer_type: string
+  expected_source_session: 5
+- session: 9
+  task_id: cs_consume_4
+  task_type: dependent
+  role: consume
+  fact_id: campaign_success_mrr
+  prompt: Using marketing's 'successful campaign' MRR rule decided earlier, how many
+    of the company's campaigns are currently successful?
+  answer: 5
+  answer_type: int
+  expected_source_session: 5
+- session: 10
+  task_id: pi_establish
+  task_type: independent
+  role: establish
+  fact_id: priority_industries
+  prompt: 'In the Q3 expansion planning session, leadership decided the priority industries
+    for expansion are: Fintech, Healthtech, Cybersecurity. Using this list, how many
+    customers in priority industries signed up after 2022-05-06?'
+  answer: 18
+  answer_type: int
+  decision_planted: priority_industries
+- session: 11
+  task_id: ew_trap_4
+  task_type: trap
+  role: consume
+  fact_id: engaged_window
+  prompt: Using the ad hoc 'engaged customer' lookback window for the retention project,
+    how many engaged customers are there company-wide?
+  answer: 58
+  answer_type: int
+  stale_answer: 70
+  expected_source_session: 6
+  stale_source_session: 1
+- session: 12
+  task_id: pi_consume_4
+  task_type: dependent
+  role: consume
+  fact_id: priority_industries
+  prompt: Using the Q3 expansion 'priority industries' list decided earlier, how many
+    support tickets have been opened by priority-industry customers?
+  answer: 33
+  answer_type: int
+  expected_source_session: 10
+- session: 13
+  task_id: cs_consume_1
+  task_type: dependent
+  role: consume
+  fact_id: campaign_success_mrr
+  prompt: Using marketing's 'successful campaign' MRR rule decided earlier, is the
+    'Compass Launch' campaign successful? Answer 'yes' or 'no'.
+  answer: 'yes'
+  answer_type: string
+  expected_source_session: 5
+- session: 14
+  task_id: hv_consume_1
+  task_type: dependent
+  role: consume
+  fact_id: high_value_mrr
+  prompt: Using the loyalty-program 'high-value customer' definition decided earlier,
+    how many high-value customers are there in the Media industry?
+  answer: 6
+  answer_type: int
+  expected_source_session: 4
+- session: 15
+  task_id: ew_trap_2
+  task_type: trap
+  role: consume
+  fact_id: engaged_window
+  prompt: Using the ad hoc 'engaged customer' lookback window for the retention project,
+    how many engaged customers are there based in NL?
+  answer: 3
+  answer_type: int
+  stale_answer: 6
+  expected_source_session: 6
+  stale_source_session: 1
+- session: 16
+  task_id: noise_2
+  task_type: independent
+  role: noise
+  fact_id: null
+  prompt: What is the total invoice amount on record for customer 'Ember Group'?
+  answer: 2170
+  answer_type: int
+- session: 17
+  task_id: pi_consume_3
+  task_type: dependent
+  role: consume
+  fact_id: priority_industries
+  prompt: Using the Q3 expansion 'priority industries' list decided earlier, how many
+    priority-industry customers are on the Enterprise plan?
+  answer: 8
+  answer_type: int
+  expected_source_session: 10
+- session: 18
+  task_id: hv_consume_4
+  task_type: dependent
+  role: consume
+  fact_id: high_value_mrr
+  prompt: Using the loyalty-program 'high-value customer' definition decided earlier,
+    how many high-value customers are there who signed up before 2024-09-06?
+  answer: 18
+  answer_type: int
+  expected_source_session: 4
+- session: 19
+  task_id: pi_consume_1
+  task_type: dependent
+  role: consume
+  fact_id: priority_industries
+  prompt: Using the Q3 expansion 'priority industries' list decided earlier, how many
+    priority-industry customers signed up after 2023-04-16?
+  answer: 16
+  answer_type: int
+  expected_source_session: 10
+- session: 20
+  task_id: pi_consume_2
+  task_type: dependent
+  role: consume
+  fact_id: priority_industries
+  prompt: Using the Q3 expansion 'priority industries' list decided earlier, what
+    is the total invoice amount from priority-industry customers between 2022-11-08
+    and 2023-03-11?
+  answer: 753
+  answer_type: int
+  expected_source_session: 10
+- session: 21
+  task_id: noise_3
+  task_type: independent
+  role: noise
+  fact_id: null
+  prompt: How many employees are on the Marketing team?
+  answer: 1
+  answer_type: int
+- session: 22
+  task_id: ew_trap_1
+  task_type: trap
+  role: consume
+  fact_id: engaged_window
+  prompt: Using the ad hoc 'engaged customer' lookback window for the retention project,
+    how many engaged customers are there in the Logistics industry?
+  answer: 8
+  answer_type: int
+  stale_answer: 10
+  expected_source_session: 6
+  stale_source_session: 1
+- session: 23
+  task_id: pt_revise
+  task_type: independent
+  role: revise
+  fact_id: priority_ticket_categories
+  prompt: 'Support leadership revised the at-risk category set — data showed billing
+    tickets rarely led to churn, while data_export tickets did. The at-risk categories
+    are now: bug_report, data_export. Using this updated rule, how many at-risk tickets
+    have been opened in total?'
+  answer: 38
+  answer_type: int
+  decision_planted: priority_ticket_categories
+- session: 24
+  task_id: pt_trap_3
+  task_type: trap
+  role: consume
+  fact_id: priority_ticket_categories
+  prompt: Using the support team's 'at-risk ticket' category set, how many at-risk
+    tickets were opened between 2022-08-27 and 2024-05-01?
+  answer: 6
+  answer_type: int
+  stale_answer: 3
+  expected_source_session: 23
+  stale_source_session: 2
+- session: 25
+  task_id: hv_consume_2
+  task_type: dependent
+  role: consume
+  fact_id: high_value_mrr
+  prompt: Using the loyalty-program 'high-value customer' definition decided earlier,
+    how many high-value customers are there based in AU?
+  answer: 4
+  answer_type: int
+  expected_source_session: 4
+- session: 26
+  task_id: pt_trap_2
+  task_type: trap
+  role: consume
+  fact_id: priority_ticket_categories
+  prompt: Using the support team's 'at-risk ticket' category set, how many at-risk
+    tickets were opened between 2022-07-30 and 2024-05-07?
+  answer: 6
+  answer_type: int
+  stale_answer: 3
+  expected_source_session: 23
+  stale_source_session: 2
+- session: 27
+  task_id: pt_trap_4
+  task_type: trap
+  role: consume
+  fact_id: priority_ticket_categories
+  prompt: Using the support team's 'at-risk ticket' category set, how many at-risk
+    tickets were opened between 2022-06-30 and 2024-05-30?
+  answer: 6
+  answer_type: int
+  stale_answer: 3
+  expected_source_session: 23
+  stale_source_session: 2
+- session: 28
+  task_id: ew_trap_3
+  task_type: trap
+  role: consume
+  fact_id: engaged_window
+  prompt: Using the ad hoc 'engaged customer' lookback window for the retention project,
+    how many engaged customers are there on the Enterprise plan?
+  answer: 22
+  answer_type: int
+  stale_answer: 28
+  expected_source_session: 6
+  stale_source_session: 1
+- session: 29
+  task_id: pt_trap_1
+  task_type: trap
+  role: consume
+  fact_id: priority_ticket_categories
+  prompt: Using the support team's 'at-risk ticket' category set, how many at-risk
+    tickets were opened between 2022-09-13 and 2024-07-05?
+  answer: 7
+  answer_type: int
+  stale_answer: 4
+  expected_source_session: 23
+  stale_source_session: 2
+- session: 30
+  task_id: hv_consume_3
+  task_type: dependent
+  role: consume
+  fact_id: high_value_mrr
+  prompt: Using the loyalty-program 'high-value customer' definition decided earlier,
+    how many high-value customers are there on the Enterprise plan?
+  answer: 26
+  answer_type: int
+  expected_source_session: 4

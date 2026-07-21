@@ -1,0 +1,147 @@
+seed: 0
+n_tasks: 24
+tasks:
+- session: 1
+  task_id: calib_014
+  task_type: independent
+  prompt: How many support tickets currently have priority 'low'?
+  answer: 37
+  answer_type: int
+- session: 2
+  task_id: calib_000
+  task_type: independent
+  prompt: How many support tickets currently have priority 'high'?
+  answer: 29
+  answer_type: int
+- session: 3
+  task_id: calib_017
+  task_type: independent
+  prompt: What is the total MRR from active subscriptions on the Growth plan?
+  answer: 10068
+  answer_type: int
+- session: 4
+  task_id: calib_007
+  task_type: independent
+  prompt: How many employees are on the Customer Success team?
+  answer: 2
+  answer_type: int
+- session: 5
+  task_id: calib_006
+  task_type: independent
+  prompt: What is the total invoice amount on record for customer 'Beacon Robotics'?
+  answer: 0
+  answer_type: int
+- session: 6
+  task_id: calib_011
+  task_type: independent
+  prompt: What is the budget for the 'Compass Launch' campaign?
+  answer: 20403
+  answer_type: int
+- session: 7
+  task_id: calib_022
+  task_type: independent
+  prompt: How many active customers are based in SG?
+  answer: 9
+  answer_type: int
+- session: 8
+  task_id: calib_021
+  task_type: independent
+  prompt: How many customers are in the Healthtech industry?
+  answer: 4
+  answer_type: int
+- session: 9
+  task_id: calib_010
+  task_type: independent
+  prompt: How many 'feature_use:api' events are recorded in total?
+  answer: 57
+  answer_type: int
+- session: 10
+  task_id: calib_004
+  task_type: independent
+  prompt: What is the total MRR from active subscriptions on the Enterprise plan?
+  answer: 119570
+  answer_type: int
+- session: 11
+  task_id: calib_002
+  task_type: independent
+  prompt: How many customers are attributed to the 'Catalyst Launch' campaign?
+  answer: 21
+  answer_type: int
+- session: 12
+  task_id: calib_020
+  task_type: independent
+  prompt: How many employees are on the Data team?
+  answer: 2
+  answer_type: int
+- session: 13
+  task_id: calib_003
+  task_type: independent
+  prompt: How many support tickets has Freya Berg handled?
+  answer: 0
+  answer_type: int
+- session: 14
+  task_id: calib_019
+  task_type: independent
+  prompt: What is the total invoice amount on record for customer 'Halcyon Systems'?
+  answer: 177
+  answer_type: int
+- session: 15
+  task_id: calib_005
+  task_type: independent
+  prompt: How many support tickets are there in the 'billing' category?
+  answer: 22
+  answer_type: int
+- session: 16
+  task_id: calib_018
+  task_type: independent
+  prompt: How many support tickets are there in the 'bug_report' category?
+  answer: 17
+  answer_type: int
+- session: 17
+  task_id: calib_009
+  task_type: independent
+  prompt: How many active customers are based in FR?
+  answer: 5
+  answer_type: int
+- session: 18
+  task_id: calib_023
+  task_type: independent
+  prompt: How many 'feature_use:dashboard' events are recorded in total?
+  answer: 132
+  answer_type: int
+- session: 19
+  task_id: calib_015
+  task_type: independent
+  prompt: How many customers are attributed to the 'Compass Sprint' campaign?
+  answer: 23
+  answer_type: int
+- session: 20
+  task_id: calib_016
+  task_type: independent
+  prompt: How many support tickets has Elin Petrov handled?
+  answer: 53
+  answer_type: int
+- session: 21
+  task_id: calib_008
+  task_type: independent
+  prompt: How many customers are in the Insurance industry?
+  answer: 11
+  answer_type: int
+- session: 22
+  task_id: calib_001
+  task_type: independent
+  prompt: How many customers signed up before 2024-02-27?
+  answer: 37
+  answer_type: int
+- session: 23
+  task_id: calib_013
+  task_type: independent
+  prompt: How many currently-open support tickets have priority 'high'?
+  answer: 7
+  answer_type: int
+- session: 24
+  task_id: calib_012
+  task_type: independent
+  prompt: How many invoices currently have status 'overdue'?
+  answer: 28
+  answer_type: int

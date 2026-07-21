@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+*.egg-info/
+
+# uv
+# (uv.lock IS committed on purpose — reproducibility)
+
+# Local Claude Code config (not part of the reproducible experiment)
+.claude/
+
+# Environment build artifacts — fully regenerable via
+# `uv run environment/build_env.py --seed 42`, not committed to keep the
+# repo lean. experiments/results/ (the actual measured outcomes) IS
+# committed — that's the evidence, not a build artifact.
+environment/company.db
+environment/docs/
+environment/manifest.json
+
+# Private planning / pre-publication material — not part of the public,
+# reproducible technical artifact (code, tests, results). Kept locally.
+PLAN.md
+article/
+
+# OS cruft
+.DS_Store
+Thumbs.db

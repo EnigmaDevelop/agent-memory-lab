@@ -1,0 +1,6 @@
+session,task_id,task_type,correct,category,final_answer,expected,cited_source_session,memory_truncated,memory_included_sessions
+1,calib_002,independent,True,correct,21,21,,False,
+2,calib_001,independent,False,wrong,26,37,,False,
+3,calib_000,independent,True,correct,29,29,,False,
+4,calib_004,independent,False,wrong,,119570,,False,
+5,calib_003,independent,False,wrong,,0,,False,
