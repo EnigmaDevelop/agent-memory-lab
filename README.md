@@ -10,7 +10,7 @@
   <a href="https://github.com/sponsors/EnigmaDevelop"><img alt="Sponsor" src="https://img.shields.io/badge/%E2%9D%A4-Sponsor-ea4aaa.svg"></a>
 </p>
 
-Full writeup: coming soon on Level Up Coding — this README will be updated with the link once it's live.
+Full writeup: **[I Benchmarked 3 AI Agent Memory Strategies. Only RAG Cited a Dead Decision as Current.](https://medium.com/gitconnected/i-benchmarked-3-ai-agent-memory-strategies-only-rag-cited-a-dead-decision-as-current-feb4cce68240)** — Level Up Coding.
 
 ## The finding
 
@@ -65,7 +65,7 @@ uv run python -m tasks.generate --seed 0         # 30-task sequence for this see
 export ANTHROPIC_API_KEY=sk-ant-...
 uv run python -m src.run --strategy rag --provider anthropic --model claude-sonnet-5 --seed 0
 
-uv run pytest                                     # 84 unit tests, fully deterministic, no network
+uv run pytest                                     # 88 unit tests, fully deterministic, no network
 uv run python -m scripts.analyze                  # CIs + paired permutation tests over all seeds
 uv run python -m scripts.context_report           # how large each strategy's context actually got
 ```
