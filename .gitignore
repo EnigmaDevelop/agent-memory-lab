@@ -23,6 +23,8 @@ environment/manifest.json
 # reproducible technical artifact (code, tests, results). Kept locally.
 PLAN.md
 article/
+ledger/
+child-ideas/
 
 # OS cruft
 .DS_Store

@@ -1,0 +1,62 @@
+==============================================================================
+agent-memory-lab — exposure populations and the failure funnel
+==============================================================================
+
+One confirmed false memory. This script prints every denominator it can
+legitimately be divided by, and which question each one answers.
+
+------------------------------------------------------------------------------
+1. Attempts and exposure population, per condition and pooled
+------------------------------------------------------------------------------
+   'exposed' = trap task: consumes a fact that was revised in an earlier
+   session. Fixed when the task set is generated, before the agent runs.
+  none     attempts=90   exposed=24   confirmed_false_memory=0
+  full     attempts=90   exposed=24   confirmed_false_memory=0
+  summary  attempts=90   exposed=24   confirmed_false_memory=0
+  rag      attempts=90   exposed=24   confirmed_false_memory=1
+
+  pooled over the 3 memory strategies: attempts=270  exposed=72  confirmed=1
+  -> the partner of 1/270 is 1/72, NOT 1/24.
+     1/24 is a per-condition figure and pairs with 1/90.
+
+------------------------------------------------------------------------------
+2. The failure funnel (BM25 retrieval)
+------------------------------------------------------------------------------
+    90 interactions
+    24 revision-conflict challenges
+     2 where retrieval missed the revising session
+     1 confirmed stale-memory answers
+
+  Three estimands, three owners:
+    operational incidence           1/90   (1.1%)  — how often does a user see it
+    challenge-conditioned failure   1/24   (4.2%)  — what happens when a fact has been revised
+    failure after a retrieval miss  1/2    (50.0%)  — DESCRIPTIVE ONLY, n=2
+
+  The last line is not an estimate of anything. n=2 cannot support a rate;
+  it is printed to show how large a 'rate' becomes in a thin enough slice.
+
+------------------------------------------------------------------------------
+3. Revision-session retrieval, per seed (the misses, in full)
+------------------------------------------------------------------------------
+  revision session retrieved in 22/24 trap attempts
+    MISS seed0 ew_trap_3    revision=s6   retrieved=[1, 11, 15, 22]  judge=interference_confirmed
+    MISS seed1 ew_trap_2    revision=s16  retrieved=[7, 17, 18, 20]  judge=correct
+
+  A retrieval miss is necessary but not sufficient: the misses above do not
+  all become errors. That gap is the whole reason the funnel has four levels
+  instead of two.
+
+------------------------------------------------------------------------------
+4. Chronology guard — is 'exposed' a design property or hindsight?
+------------------------------------------------------------------------------
+   Every trap task must come after the revision, which must come after the
+   establishing session. If this fails anywhere, the exposure population is
+   a post-hoc label and section 1's denominator is not defensible.
+  seed0 engaged_window               establish=s1   revise=s6   traps=[11, 15, 22, 28]  violations=none
+  seed0 priority_ticket_categories   establish=s2   revise=s23  traps=[24, 26, 27, 29]  violations=none
+  seed1 engaged_window               establish=s7   revise=s16  traps=[17, 18, 20, 21]  violations=none
+  seed1 priority_ticket_categories   establish=s5   revise=s12  traps=[22, 23, 28, 30]  violations=none
+  seed2 engaged_window               establish=s10  revise=s15  traps=[18, 19, 25, 30]  violations=none
+  seed2 priority_ticket_categories   establish=s6   revise=s20  traps=[24, 26, 27, 29]  violations=none
+
+  TOTAL VIOLATIONS: 0  — exposure is a design property, as claimed
