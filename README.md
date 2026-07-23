@@ -44,9 +44,11 @@ Three things that weren't the expected result going in:
    budget on 56/90 sessions; every memory strategy ran a median of 2 turns and hit it zero times.
 2. **Exactly one of 270 memory-backed attempts produced a confirmed false memory** (an answer
    matching a known-stale value *and* citing the superseded session) — and it was RAG, the
-   strategy usually assumed to be the safe, grounded one, not full-history replay. The transcript
-   shows exactly why: BM25 retrieval never surfaced the one session that mattered, because a
-   correction doesn't share vocabulary with the questions asked about it afterward.
+   strategy usually assumed to be the safe, grounded one, not full-history replay. In that one case
+   the revising session was absent from the retrieved context — but that absence was not the
+   pattern: BM25 retrieved the revising session in **22 of 24** RAG trap attempts, and only one of
+   the two misses became a wrong answer. A retrieval miss was present in the confirmed failure
+   without being sufficient to cause one (`scripts/exposure_report.py`).
 3. **All 6 errors the memory strategies made land in one of the 6 task families**, which is only
    18 of each condition's 90 attempts. The benchmark's difficulty is concentrated far more than
    the headline accuracies suggest — `scripts/analyze.py` section 5 prints this.
