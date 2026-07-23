@@ -5,44 +5,46 @@ agent-memory-lab — 3-seed frontier-arm analysis (claude-sonnet-5)
 Note: pooling 3 order-seeds of the same 30 task-content items is 3
 reshuffled looks at one task set, not 90 independent samples — CIs
 below are informative, not a substitute for a larger/varied task set.
+Significance tests are PAIRED on (task_id, seed) for that reason.
 
 ------------------------------------------------------------------------------
 1. Overall accuracy per strategy (pooled, 90 rows = 30 tasks x 3 seeds)
 ------------------------------------------------------------------------------
-  none     n=90  accuracy=0.322 95% CI [0.222, 0.411]
-  full     n=90  accuracy=1.000 95% CI [1.000, 1.000]
-  summary  n=90  accuracy=0.956 95% CI [0.911, 0.989]
-  rag      n=90  accuracy=0.978 95% CI [0.944, 1.000]
+  none     n=90  (clusters=30) accuracy=0.322 95% CI [0.167, 0.478] (cluster bootstrap)
+  full     n=90  (clusters=30) accuracy=1.000 95% CI [0.886, 1.000] (Wilson on clusters; bootstrap degenerate)
+  summary  n=90  (clusters=30) accuracy=0.956 95% CI [0.900, 1.000] (cluster bootstrap)
+  rag      n=90  (clusters=30) accuracy=0.978 95% CI [0.944, 1.000] (cluster bootstrap)
 
 ------------------------------------------------------------------------------
 2. Accuracy by task type (independent / dependent / trap)
 ------------------------------------------------------------------------------
   none:
-    independent  n=30  accuracy=0.933 95% CI [0.833, 1.000]
-    dependent    n=36  accuracy=0.028 95% CI [0.000, 0.083]
-    trap         n=24  accuracy=0.000 95% CI [0.000, 0.000]
+    independent  n=30  (clusters=10) accuracy=0.933 95% CI [0.800, 1.000] (cluster bootstrap)
+    dependent    n=36  (clusters=12) accuracy=0.028 95% CI [0.000, 0.083] (cluster bootstrap)
+    trap         n=24  (clusters=8 ) accuracy=0.000 95% CI [0.000, 0.324] (Wilson on clusters; bootstrap degenerate)
   full:
-    independent  n=30  accuracy=1.000 95% CI [1.000, 1.000]
-    dependent    n=36  accuracy=1.000 95% CI [1.000, 1.000]
-    trap         n=24  accuracy=1.000 95% CI [1.000, 1.000]
+    independent  n=30  (clusters=10) accuracy=1.000 95% CI [0.722, 1.000] (Wilson on clusters; bootstrap degenerate)
+    dependent    n=36  (clusters=12) accuracy=1.000 95% CI [0.757, 1.000] (Wilson on clusters; bootstrap degenerate)
+    trap         n=24  (clusters=8 ) accuracy=1.000 95% CI [0.676, 1.000] (Wilson on clusters; bootstrap degenerate)
   summary:
-    independent  n=30  accuracy=0.933 95% CI [0.833, 1.000]
-    dependent    n=36  accuracy=1.000 95% CI [1.000, 1.000]
-    trap         n=24  accuracy=0.917 95% CI [0.792, 1.000]
+    independent  n=30  (clusters=10) accuracy=0.933 95% CI [0.833, 1.000] (cluster bootstrap)
+    dependent    n=36  (clusters=12) accuracy=1.000 95% CI [0.757, 1.000] (Wilson on clusters; bootstrap degenerate)
+    trap         n=24  (clusters=8 ) accuracy=0.917 95% CI [0.750, 1.000] (cluster bootstrap)
   rag:
-    independent  n=30  accuracy=0.967 95% CI [0.900, 1.000]
-    dependent    n=36  accuracy=1.000 95% CI [1.000, 1.000]
-    trap         n=24  accuracy=0.958 95% CI [0.875, 1.000]
+    independent  n=30  (clusters=10) accuracy=0.967 95% CI [0.900, 1.000] (cluster bootstrap)
+    dependent    n=36  (clusters=12) accuracy=1.000 95% CI [0.757, 1.000] (Wilson on clusters; bootstrap degenerate)
+    trap         n=24  (clusters=8 ) accuracy=0.958 95% CI [0.875, 1.000] (cluster bootstrap)
 
 ------------------------------------------------------------------------------
-3. Permutation tests (does the gap beat label-shuffling by chance?)
+3. Paired permutation tests, matched on (task_id, seed)
 ------------------------------------------------------------------------------
-  none     vs full     gap=-0.678  p=0.0000  ***
-  none     vs summary  gap=-0.633  p=0.0000  ***
-  none     vs rag      gap=-0.656  p=0.0000  ***
-  full     vs rag      gap=+0.022  p=0.5020  n.s.
-  summary  vs rag      gap=-0.022  p=0.6865  n.s.
-  full     vs summary  gap=+0.044  p=0.1040  n.s.
+   discordant = pairs where the two conditions disagree; only those carry signal.
+  none     vs full     gap=-0.678  p=0.0000  ***  discordant: none +0 / full +61
+  none     vs summary  gap=-0.633  p=0.0000  ***  discordant: none +1 / summary +58
+  none     vs rag      gap=-0.656  p=0.0000  ***  discordant: none +1 / rag +60
+  full     vs rag      gap=+0.022  p=0.4955  n.s. discordant: full +2 / rag +0
+  summary  vs rag      gap=-0.022  p=0.6279  n.s. discordant: summary +1 / rag +3
+  full     vs summary  gap=+0.044  p=0.1270  n.s. discordant: full +4 / summary +0
 
 ------------------------------------------------------------------------------
 4. False-memory rate (confirmed interference, trap tasks only)
@@ -51,3 +53,23 @@ below are informative, not a substitute for a larger/varied task set.
   full     trap_n=24  confirmed=0  suspected=0  false_memory_rate=0.000
   summary  trap_n=24  confirmed=0  suspected=0  false_memory_rate=0.000
   rag      trap_n=24  confirmed=1  suspected=0  false_memory_rate=0.042
+
+------------------------------------------------------------------------------
+5. Error clustering by task family (why the tests above are paired)
+------------------------------------------------------------------------------
+  none     errors=61  cs=11/15, ew=14/18, hv=12/15, pi=12/15, pt=12/18
+  full     errors=0   (none)
+  summary  errors=4   ew=4/18
+  rag      errors=2   ew=2/18
+
+  memory conditions combined: 6 errors across 1 of 6 task families
+    ew       6 errors; family is 18/90 of attempts (20.0%)
+
+------------------------------------------------------------------------------
+6. Agent turns per session (the cost mechanism, measured not assumed)
+------------------------------------------------------------------------------
+   budget is 8 assistant turns; hitting it means the agent kept retrying.
+  none     mean=6.23  median=8  hit_budget(>=8)=56/90 (62%)
+  full     mean=2.08  median=2  hit_budget(>=8)=0/90 (0%)
+  summary  mean=2.09  median=2  hit_budget(>=8)=0/90 (0%)
+  rag      mean=2.21  median=2  hit_budget(>=8)=0/90 (0%)
